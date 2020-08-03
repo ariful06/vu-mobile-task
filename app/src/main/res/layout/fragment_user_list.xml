@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data android:layout_height="match_parent">
+
+        <variable
+            name="viewModel"
+            type="com.multithread.vumobiletest.viewmodel.UserViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUserList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:user_items="@{viewModel.userList}"
+           />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{viewModel.isLoading? View.VISIBLE:View.GONE}"
+           />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No data found"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:visibility="@{viewModel.userList == null ? View.VISIBLE:View.GONE}"
+            android:textAppearance="?android:textAppearanceLarge"/>
+    </RelativeLayout>
+</layout>
